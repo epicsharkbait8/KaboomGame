@@ -1,6 +1,6 @@
 // Initialize the Kaboom context.
 kaboom({
-    width: 800,
+    width: 1200,
     height: 600,
     background: [0, 100, 200],
 });
@@ -9,9 +9,9 @@ kaboom({
 setGravity(800);
 
 // --- Load Assets ---
-loadSprite("apple", "https://kaboomjs.com/sprites/apple.png");
+loadSprite("dino", "https://kaboomjs.com/sprites/dino.png");
 loadSprite("enemy", "https://kaboomjs.com/sprites/gigagantrum.png");
-loadSprite("coin", "https://kaboomjs.com/sprites/coin.png");
+loadSprite("watermelon", "https://kaboomjs.com/sprites/watermelon.png");
 loadSprite("door", "https://kaboomjs.com/sprites/door.png");
 
 // --- Define Custom Components ---
@@ -57,6 +57,15 @@ scene("main", ({ level } = { level: 0 }) => {
             "     ^           ^  ",
             "      =      =    D ",
             "====================",
+        ],
+        [
+            "                    ",
+            "                 ===",
+            "                    ",
+            "         =       =  ",
+            "   =  ^    ^     =  ",
+            "                 =D ",
+            "====================",
         ]
     ];
 
@@ -76,9 +85,9 @@ scene("main", ({ level } = { level: 0 }) => {
                 "platform",
             ],
             "$": () => [
-                sprite("coin"),
+                sprite("watermelon"),
                 area(),
-                "coin",
+                "watermelon",
             ],
             "D": () => [
                 sprite("door"),
@@ -107,7 +116,7 @@ scene("main", ({ level } = { level: 0 }) => {
     ])
     // --- The Player Character ---
     const player = add([
-        sprite("apple"),
+        sprite("dino"),
         pos(100, 100),
         area({ scale: 0.7 }),
         body(),
@@ -120,9 +129,9 @@ scene("main", ({ level } = { level: 0 }) => {
     onKeyPress("space", () => { if (player.isGrounded()) { player.jump(650); } });
 
     //coins!
-    player.onCollide("coin", (coin) =>{
-        destroy(coin);
-        score+= 10;
+    player.onCollide("watermelon", (watermelon) =>{
+        destroy(watermelon);
+        score+= 5;
         scoreLabel.text ="Score: " + score;
     });
 
